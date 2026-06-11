@@ -6,9 +6,11 @@ interface SidebarProps {
   setActiveTab: (tab: string) => void;
   currentUser: Funcionario;
   onLogout: () => void;
+  isOpen?: boolean;
+  setIsOpen?: (val: boolean) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, currentUser, onLogout }) => {
+const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, currentUser, onLogout, isOpen, setIsOpen }) => {
   const [theme, setTheme] = useState<'light' | 'dark'>(
     (localStorage.getItem('rentflow_theme') as 'light' | 'dark') || 'light'
   );
@@ -34,19 +36,28 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, currentUser,
 
   return (
     <div 
-      className="d-flex flex-column flex-shrink-0 sidebar-container" 
+      className={`d-flex flex-column flex-shrink-0 sidebar-container ${isOpen ? 'open' : ''}`} 
     >
       {/* Brand Header */}
-      <div className="p-4 d-flex align-items-center gap-3 border-bottom sidebar-border">
-        <div 
-          className="d-flex align-items-center justify-content-center sidebar-brand-icon"
+      <div className="p-4 d-flex align-items-center justify-content-between border-bottom sidebar-border">
+        <div className="d-flex align-items-center gap-3">
+          <div 
+            className="d-flex align-items-center justify-content-center sidebar-brand-icon"
+          >
+            <i className="bi bi-water text-primary fs-4" style={{ color: '#818cf8' }}></i>
+          </div>
+          <div>
+            <h5 className="fw-bold m-0 sidebar-brand-text" style={{ letterSpacing: '0.5px' }}>RentFlow</h5>
+            <span className="fs-8 sidebar-brand-sub">Gestão de Frotas</span>
+          </div>
+        </div>
+        {/* Mobile Close Button */}
+        <button 
+          className="btn btn-link text-secondary p-0 d-lg-none shadow-none" 
+          onClick={() => setIsOpen && setIsOpen(false)}
         >
-          <i className="bi bi-water text-primary fs-4" style={{ color: '#818cf8' }}></i>
-        </div>
-        <div>
-          <h5 className="fw-bold m-0 sidebar-brand-text" style={{ letterSpacing: '0.5px' }}>RentFlow</h5>
-          <span className="fs-8 sidebar-brand-sub">Gestão de Frotas</span>
-        </div>
+          <i className="bi bi-x-lg fs-4"></i>
+        </button>
       </div>
 
       {/* User Info Card */}

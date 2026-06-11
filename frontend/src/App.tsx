@@ -14,6 +14,12 @@ import type { Funcionario } from './types';
 const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<Funcionario | null>(getCurrentUser());
   const [activeTab, setActiveTab] = useState<string>('dashboard');
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+
+  const handleTabChange = (tabId: string) => {
+    setActiveTab(tabId);
+    setIsSidebarOpen(false); // Fecha a sidebar no mobile ao clicar num link
+  };
 
   const handleLoginSuccess = (user: Funcionario) => {
     setCurrentUser(user);
@@ -62,24 +68,51 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="d-flex w-100" style={{ minHeight: '100vh' }}>
+    <div className="d-flex w-100" style={{ minHeight: '100vh', position: 'relative' }}>
+      {/* Sidebar Overlay for Mobile */}
+      <div 
+        className={`sidebar-overlay ${isSidebarOpen ? 'open' : ''}`}
+        onClick={() => setIsSidebarOpen(false)}
+      ></div>
+
       {/* Sidebar Navigation */}
       <Sidebar 
         activeTab={activeTab} 
-        setActiveTab={setActiveTab} 
+        setActiveTab={handleTabChange} 
         currentUser={currentUser} 
-        onLogout={handleLogout} 
+        onLogout={handleLogout}
+        isOpen={isSidebarOpen}
+        setIsOpen={setIsSidebarOpen}
       />
       
       {/* Main Content Pane */}
       <main 
-        className="flex-grow-1" 
+        className="flex-grow-1 d-flex flex-column" 
         style={{ 
           overflowY: 'auto', 
-          height: '100vh'
+          height: '100vh',
+          width: '100%',
+          maxWidth: '100vw'
         }}
       >
-        <div className="h-100">
+        {/* Mobile Header (Visible only on small screens) */}
+        <div className="mobile-header align-items-center justify-content-between p-3">
+          <div className="d-flex align-items-center gap-2">
+            <div className="d-flex align-items-center justify-content-center sidebar-brand-icon" style={{width: 32, height: 32}}>
+              <i className="bi bi-water text-primary fs-5" style={{ color: '#818cf8' }}></i>
+            </div>
+            <h5 className="fw-bold m-0" style={{ letterSpacing: '0.5px' }}>RentFlow</h5>
+          </div>
+          <button 
+            className="btn btn-light shadow-none border-0 px-2 py-1" 
+            onClick={() => setIsSidebarOpen(true)}
+            style={{ background: 'transparent' }}
+          >
+            <i className="bi bi-list fs-2 text-primary"></i>
+          </button>
+        </div>
+
+        <div className="flex-grow-1">
           {renderActivePage()}
         </div>
       </main>

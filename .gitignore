@@ -1,0 +1,17 @@
+# Agent and BMad directories
+.agent/
+_bmad/
+_bmad-output/
+design-artifacts/
+
+# Node.js
+node_modules/
+dist/
+build/
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db

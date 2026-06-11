@@ -36,7 +36,7 @@ export const getCurrentUser = (): Funcionario | null => {
   if (!userJson) return null;
   try {
     return JSON.parse(userJson) as Funcionario;
-  } catch (e) {
+  } catch {
     return null;
   }
 };

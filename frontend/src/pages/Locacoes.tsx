@@ -1104,7 +1104,7 @@ const Locacoes: React.FC = () => {
                               <span className="detail-label">CPF</span>
                               <div className="detail-value">{client.cpf}</div>
                             </div>
-                            <div className="col-6">
+                            <div className="col-12">
                               <span className="detail-label">E-mail</span>
                               <div className="detail-value text-break">{client.email}</div>
                             </div>
@@ -1187,7 +1187,7 @@ const Locacoes: React.FC = () => {
                               Realizada em <strong>{formatDateSafe(l.data_reserva)}</strong>
                             </div>
                             <div className="fs-8 text-muted mt-1 d-flex align-items-center gap-1">
-                              <i className="bi bi-person-badge"></i> {opRegistro ? opRegistro.nome : `Func. #${l.id_func_registro}`}
+                              <i className="bi bi-person-badge"></i> {opRegistro ? opRegistro.nome : (l.id_func_registro ? `Func. #${l.id_func_registro}` : 'Sistema')}
                             </div>
                           </div>
 
@@ -1200,7 +1200,7 @@ const Locacoes: React.FC = () => {
                                   Realizada em <strong>{formatDateSafe(l.data_retirada)}</strong>
                                 </div>
                                 <div className="fs-8 text-muted mt-1 d-flex align-items-center gap-1 mb-2">
-                                  <i className="bi bi-person-badge"></i> {opAutoriza ? opAutoriza.nome : `Func. #${l.id_func_autoriza}`}
+                                  <i className="bi bi-person-badge"></i> {opAutoriza ? opAutoriza.nome : (l.id_func_autoriza ? `Func. #${l.id_func_autoriza}` : 'Sistema')}
                                 </div>
                                 {vistRetirada && (
                                   <div className="bg-light-subtle p-2 rounded border fs-8 text-dark">
@@ -1226,7 +1226,7 @@ const Locacoes: React.FC = () => {
                                   Concluída em <strong>{formatDateSafe(l.data_devol_real)}</strong>
                                 </div>
                                 <div className="fs-8 text-muted mt-1 d-flex align-items-center gap-1 mb-2">
-                                  <i className="bi bi-person-badge"></i> {opDevolucao ? opDevolucao.nome : `Func. #${vistDevolucao?.id_func}`}
+                                  <i className="bi bi-person-badge"></i> {opDevolucao ? opDevolucao.nome : (vistDevolucao?.id_func ? `Func. #${vistDevolucao.id_func}` : 'Sistema')}
                                 </div>
                                 {vistDevolucao && (
                                   <div className="bg-light-subtle p-2 rounded border fs-8 text-dark">

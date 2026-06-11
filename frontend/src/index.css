@@ -541,8 +541,13 @@ input[type="number"] {
   color: #212529;
 }
 
-[data-theme='dark'] .modal-body.bg-light-subtle {
+[data-theme='dark'] .bg-light-subtle {
   background-color: #0f172a !important;
+  color: #f8fafc !important;
+}
+
+[data-theme='dark'] .bg-light-subtle .text-dark {
+  color: #f8fafc !important;
 }
 
 [data-theme='dark'] .detail-card {

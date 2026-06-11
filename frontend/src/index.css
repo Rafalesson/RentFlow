@@ -427,6 +427,23 @@ input[type="number"] {
    Responsive Layout (Mobile & Tablet)
    ============================================================================= */
 
+/* Tipografia Responsiva para Títulos das Páginas */
+.page-title {
+  font-size: 1.5rem !important;
+}
+.page-subtitle {
+  font-size: 0.85rem !important;
+}
+
+@media (min-width: 768px) {
+  .page-title {
+    font-size: 2.25rem !important; /* Tamanho padrão de h1 no desktop */
+  }
+  .page-subtitle {
+    font-size: 1rem !important;
+  }
+}
+
 @media (max-width: 991.98px) {
   .sidebar-container {
     position: fixed;

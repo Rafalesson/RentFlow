@@ -127,8 +127,8 @@ const Configuracoes: React.FC<ConfiguracoesProps> = ({ user, onProfileUpdated })
   return (
     <div className="container-fluid py-4">
       <div className="mb-4">
-        <h1 className="fw-bold text-dark mb-1">Configurações de Perfil</h1>
-        <p className="text-muted">Gerencie suas informações pessoais, senha e foto de exibição</p>
+        <h1 className="fw-bold text-dark mb-1 page-title">Configurações de Perfil</h1>
+        <p className="text-muted page-subtitle mb-0">Gerencie suas informações e credenciais de acesso</p>
       </div>
 
       {success && (

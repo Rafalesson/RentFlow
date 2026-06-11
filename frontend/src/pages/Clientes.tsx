@@ -182,14 +182,15 @@ const Clientes: React.FC = () => {
 
   return (
     <div className="container-fluid py-4">
-      <div className="d-flex justify-content-between align-items-center mb-4">
+      <div className="d-flex justify-content-between align-items-center mb-4 gap-3">
         <div>
-          <h1 className="fw-bold text-dark mb-1">Clientes</h1>
-          <p className="text-muted">Gerencie o cadastro de clientes da locadora</p>
+          <h1 className="fw-bold text-dark mb-1 page-title">Clientes</h1>
+          <p className="text-muted page-subtitle mb-0">Gerencie o cadastro de clientes da locadora</p>
         </div>
         {!showForm && (
-          <button className="btn btn-gradient py-2 px-4 rounded-3 d-flex align-items-center" onClick={handleOpenCreate}>
-            <i className="bi bi-person-plus-fill me-2 fs-5"></i> Novo Cliente
+          <button className="btn btn-gradient py-2 px-3 px-md-4 rounded-3 d-flex align-items-center" onClick={handleOpenCreate} title="Novo Cliente">
+            <i className="bi bi-person-plus-fill fs-5"></i>
+            <span className="d-none d-md-inline ms-2">Novo Cliente</span>
           </button>
         )}
       </div>

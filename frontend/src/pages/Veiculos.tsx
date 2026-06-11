@@ -195,14 +195,15 @@ const Veiculos: React.FC = () => {
 
   return (
     <div className="container-fluid py-4">
-      <div className="d-flex justify-content-between align-items-center mb-4">
+      <div className="d-flex justify-content-between align-items-center mb-4 gap-3">
         <div>
-          <h1 className="fw-bold text-dark mb-1">Veículos</h1>
-          <p className="text-muted">Gerencie a frota de automóveis da locadora</p>
+          <h1 className="fw-bold text-dark mb-1 page-title">Veículos</h1>
+          <p className="text-muted page-subtitle mb-0">Gerencie a frota de automóveis da locadora</p>
         </div>
         {!showForm && (
-          <button className="btn btn-gradient py-2 px-4 rounded-3 d-flex align-items-center" onClick={handleOpenCreate}>
-            <i className="bi bi-car-front-fill me-2 fs-5"></i> Novo Veículo
+          <button className="btn btn-gradient py-2 px-3 px-md-4 rounded-3 d-flex align-items-center" onClick={handleOpenCreate} title="Novo Veículo">
+            <i className="bi bi-car-front-fill fs-5"></i>
+            <span className="d-none d-md-inline ms-2">Novo Veículo</span>
           </button>
         )}
       </div>

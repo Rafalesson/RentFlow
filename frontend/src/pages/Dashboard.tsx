@@ -130,13 +130,14 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="container-fluid py-4">
-      <div className="d-flex justify-content-between align-items-center mb-4">
+      <div className="d-flex justify-content-between align-items-center mb-4 gap-3">
         <div>
-          <h1 className="fw-bold text-dark mb-1">Painel Operacional</h1>
-          <p className="text-muted">Acompanhe as métricas do RentFlow em tempo real</p>
+          <h1 className="fw-bold text-dark mb-1 page-title">Painel Operacional</h1>
+          <p className="text-muted page-subtitle mb-0">Acompanhe as métricas do RentFlow em tempo real</p>
         </div>
-        <button className="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1" onClick={fetchData} disabled={loading}>
-          <i className="bi bi-arrow-clockwise"></i> Atualizar Dados
+        <button className="btn btn-outline-secondary btn-sm d-flex align-items-center" onClick={fetchData} disabled={loading} title="Atualizar Dados">
+          <i className="bi bi-arrow-clockwise"></i>
+          <span className="d-none d-md-inline ms-2">Atualizar Dados</span>
         </button>
       </div>
 

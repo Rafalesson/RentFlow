@@ -468,14 +468,15 @@ const Locacoes: React.FC = () => {
   return (
     <div className="container-fluid py-4">
       {/* Header */}
-      <div className="d-flex justify-content-between align-items-center mb-4">
+      <div className="d-flex justify-content-between align-items-center mb-4 gap-3">
         <div>
-          <h1 className="fw-bold text-dark mb-1">Locações & Reservas</h1>
-          <p className="text-muted">Acompanhe retiradas, devoluções e vistorias operacionais</p>
+          <h1 className="fw-bold text-dark mb-1 page-title">Locações & Reservas</h1>
+          <p className="text-muted page-subtitle mb-0">Gerencie contratos, retiradas e devoluções</p>
         </div>
         {!showCreateWizard && (
-          <button className="btn btn-gradient py-2 px-4 rounded-3 d-flex align-items-center" onClick={handleOpenReserve}>
-            <i className="bi bi-calendar-plus-fill me-2 fs-5"></i> Nova Reserva
+          <button className="btn btn-gradient py-2 px-3 px-md-4 rounded-3 d-flex align-items-center" onClick={handleOpenReserve} title="Nova Reserva">
+            <i className="bi bi-calendar-plus-fill fs-5"></i>
+            <span className="d-none d-md-inline ms-2">Nova Reserva</span>
           </button>
         )}
       </div>

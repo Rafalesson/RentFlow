@@ -255,14 +255,15 @@ const Manutencoes: React.FC = () => {
 
   return (
     <div className="container-fluid py-4">
-      <div className="d-flex justify-content-between align-items-center mb-4">
+      <div className="d-flex justify-content-between align-items-center mb-4 gap-3">
         <div>
-          <h1 className="fw-bold text-dark mb-1">Manutenções</h1>
-          <p className="text-muted">Gerencie o envio de veículos para manutenção preventiva e corretiva</p>
+          <h1 className="fw-bold text-dark mb-1 page-title">Manutenções</h1>
+          <p className="text-muted page-subtitle mb-0">Controle de reparos, revisões e custos com a frota</p>
         </div>
         {!showSendForm && !showReturnForm && (
-          <button className="btn btn-gradient py-2 px-4 rounded-3 d-flex align-items-center" onClick={handleOpenSend}>
-            <i className="bi bi-tools me-2 fs-5"></i> Enviar Veículo
+          <button className="btn btn-gradient py-2 px-3 px-md-4 rounded-3 d-flex align-items-center" onClick={handleOpenSend} title="Registrar Manutenção">
+            <i className="bi bi-tools fs-5"></i>
+            <span className="d-none d-md-inline ms-2">Enviar Veículo</span>
           </button>
         )}
       </div>

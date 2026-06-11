@@ -217,8 +217,8 @@ const TabelasAuxiliares: React.FC = () => {
   return (
     <div className="container-fluid py-4">
       <div className="mb-4">
-        <h1 className="fw-bold text-dark mb-1">Tabelas Auxiliares</h1>
-        <p className="text-muted">Gerencie as categorias de veículos, planos de seguros e funcionários cadastrados</p>
+        <h1 className="fw-bold text-dark mb-1 page-title">Tabelas Auxiliares</h1>
+        <p className="text-muted page-subtitle mb-0">Cadastros complementares para o funcionamento do sistema</p>
       </div>
 
       {success && (

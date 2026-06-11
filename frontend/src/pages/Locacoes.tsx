@@ -1085,165 +1085,205 @@ const Locacoes: React.FC = () => {
                   <button type="button" className="btn-close" onClick={() => setSelectedLocDetails(null)}></button>
                 </div>
                 
-                <div className="modal-body px-4 py-3">
+                <div className="modal-body bg-light-subtle px-4 py-4">
                   <div className="row g-4">
-                    {/* Coluna Esquerda: Cliente, Veículo e Seguro */}
-                    <div className="col-md-6">
+                    {/* Cliente, Veículo e Seguro */}
+                    <div className="col-md-6 d-flex flex-column gap-4">
                       {/* Cliente */}
-                      <div className="mb-4">
-                        <h6 className="fw-bold text-primary mb-2 pb-1 border-bottom d-flex align-items-center">
-                          <i className="bi bi-person me-2"></i> Dados do Cliente
+                      <div className="detail-card">
+                        <h6 className="detail-section-title">
+                          <i className="bi bi-person"></i> Dados do Cliente
                         </h6>
                         {client ? (
-                          <div className="fs-7">
-                            <div className="mb-1"><strong>Nome:</strong> {client.nome}</div>
-                            <div className="mb-1"><strong>CPF:</strong> {client.cpf}</div>
-                            <div className="mb-1"><strong>E-mail:</strong> {client.email}</div>
-                            <div className="mb-1">
-                              <strong>CNH:</strong> {client.cnh_numero} (Cat. {client.cnh_categoria})
+                          <div className="row g-3">
+                            <div className="col-12">
+                              <span className="detail-label">Nome Completo</span>
+                              <div className="detail-value fw-semibold">{client.nome}</div>
                             </div>
-                            <div className="mb-1">
-                              <strong>Validade CNH:</strong> {formatDateSafe(client.cnh_validade)}
+                            <div className="col-6">
+                              <span className="detail-label">CPF</span>
+                              <div className="detail-value">{client.cpf}</div>
+                            </div>
+                            <div className="col-6">
+                              <span className="detail-label">E-mail</span>
+                              <div className="detail-value text-break">{client.email}</div>
+                            </div>
+                            <div className="col-6">
+                              <span className="detail-label">CNH (Categoria)</span>
+                              <div className="detail-value">{client.cnh_numero} (Cat. {client.cnh_categoria})</div>
+                            </div>
+                            <div className="col-6">
+                              <span className="detail-label">Validade CNH</span>
+                              <div className="detail-value">{formatDateSafe(client.cnh_validade)}</div>
                             </div>
                           </div>
                         ) : (
-                          <div className="text-muted fs-7">—</div>
+                          <div className="text-muted">—</div>
                         )}
                       </div>
 
                       {/* Veículo */}
-                      <div className="mb-4">
-                        <h6 className="fw-bold text-primary mb-2 pb-1 border-bottom d-flex align-items-center">
-                          <i className="bi bi-car-front me-2"></i> Veículo e Categoria
+                      <div className="detail-card">
+                        <h6 className="detail-section-title">
+                          <i className="bi bi-car-front"></i> Veículo e Categoria
                         </h6>
                         {vehicle ? (
-                          <div className="fs-7">
-                            <div className="mb-1"><strong>Marca/Modelo:</strong> {vehicle.marca} {vehicle.modelo}</div>
-                            <div className="mb-1"><strong>Placa:</strong> <code>{vehicle.placa}</code></div>
-                            <div className="mb-1"><strong>Cor/Ano:</strong> {vehicle.cor} / {vehicle.ano_fabricacao}</div>
+                          <div className="row g-3">
+                            <div className="col-12">
+                              <span className="detail-label">Marca / Modelo</span>
+                              <div className="detail-value fw-semibold">{vehicle.marca} {vehicle.modelo}</div>
+                            </div>
+                            <div className="col-6">
+                              <span className="detail-label">Placa</span>
+                              <div className="detail-value"><code>{vehicle.placa}</code></div>
+                            </div>
+                            <div className="col-6">
+                              <span className="detail-label">Cor / Ano</span>
+                              <div className="detail-value">{vehicle.cor} / {vehicle.ano_fabricacao}</div>
+                            </div>
                           </div>
                         ) : (
-                          <div className="text-muted fs-7">—</div>
+                          <div className="text-muted">—</div>
                         )}
                       </div>
 
                       {/* Seguro */}
-                      <div>
-                        <h6 className="fw-bold text-primary mb-2 pb-1 border-bottom d-flex align-items-center">
-                          <i className="bi bi-shield-check me-2"></i> Seguro Contratado
+                      <div className="detail-card">
+                        <h6 className="detail-section-title">
+                          <i className="bi bi-shield-check"></i> Seguro Contratado
                         </h6>
                         {insurance ? (
-                          <div className="fs-7">
-                            <div className="mb-1"><strong>Nome:</strong> {insurance.nome}</div>
-                            <div className="mb-1"><strong>Valor Diário:</strong> R$ {diariaSeguro.toFixed(2)}</div>
-                            <div className="text-muted fs-8"><strong>Cobertura:</strong> {insurance.descricao_cobertura}</div>
+                          <div className="row g-3">
+                            <div className="col-12 d-flex justify-content-between align-items-center">
+                              <div>
+                                <span className="detail-label">Nome do Seguro</span>
+                                <div className="detail-value fw-semibold">{insurance.nome}</div>
+                              </div>
+                              <span className="badge bg-primary-subtle text-primary py-2 px-3 fs-6">R$ {diariaSeguro.toFixed(2)} / dia</span>
+                            </div>
+                            <div className="col-12">
+                              <span className="detail-label">Cobertura</span>
+                              <div className="detail-value text-muted fs-7">{insurance.descricao_cobertura}</div>
+                            </div>
                           </div>
                         ) : (
-                          <div className="text-muted fs-7">—</div>
+                          <div className="text-muted">—</div>
                         )}
                       </div>
                     </div>
 
-                    {/* Coluna Direita: Fluxo Operacional e Financeiro */}
-                    <div className="col-md-6">
+                    {/* Fluxo Operacional e Financeiro */}
+                    <div className="col-md-6 d-flex flex-column gap-4">
                       {/* Fluxo Operacional */}
-                      <div className="mb-4">
-                        <h6 className="fw-bold text-primary mb-2 pb-1 border-bottom d-flex align-items-center">
-                          <i className="bi bi-bezier2 me-2"></i> Fluxo de Operação
+                      <div className="detail-card">
+                        <h6 className="detail-section-title">
+                          <i className="bi bi-bezier2"></i> Fluxo de Operação
                         </h6>
-                        <div className="timeline-flow fs-7">
+                        <div className="timeline-flow mt-3">
                           {/* Abertura */}
-                          <div className="mb-2 border-start border-primary border-2 ps-3 position-relative">
-                            <span className="fw-semibold">1. Reserva Inicial</span>
-                            <div className="fs-8 text-muted">
-                              Realizada em {formatDateSafe(l.data_reserva)} por:
-                              <br />
-                              <i className="bi bi-person-badge me-1"></i> {opRegistro ? opRegistro.nome : `Funcionário #${l.id_func_registro}`}
+                          <div className="mb-3 border-start border-primary border-2 ps-3 position-relative">
+                            <div className="fw-semibold text-primary mb-1">1. Reserva Inicial</div>
+                            <div className="fs-7">
+                              Realizada em <strong>{formatDateSafe(l.data_reserva)}</strong>
+                            </div>
+                            <div className="fs-8 text-muted mt-1 d-flex align-items-center gap-1">
+                              <i className="bi bi-person-badge"></i> {opRegistro ? opRegistro.nome : `Func. #${l.id_func_registro}`}
                             </div>
                           </div>
 
                           {/* Retirada */}
-                          <div className={`mb-2 border-start ${l.data_retirada ? 'border-primary' : 'border-light'} border-2 ps-3`}>
-                            <span className="fw-semibold">2. Retirada do Veículo</span>
+                          <div className={`mb-3 border-start ${l.data_retirada ? 'border-primary' : 'border-light'} border-2 ps-3`}>
+                            <div className={`fw-semibold mb-1 ${l.data_retirada ? 'text-primary' : 'text-muted'}`}>2. Retirada do Veículo</div>
                             {l.data_retirada ? (
-                              <div className="fs-8 text-muted">
-                                Realizada em {formatDateSafe(l.data_retirada)} por:
-                                <br />
-                                <i className="bi bi-person-badge me-1"></i> {opAutoriza ? opAutoriza.nome : `Funcionário #${l.id_func_autoriza}`}
+                              <>
+                                <div className="fs-7">
+                                  Realizada em <strong>{formatDateSafe(l.data_retirada)}</strong>
+                                </div>
+                                <div className="fs-8 text-muted mt-1 d-flex align-items-center gap-1 mb-2">
+                                  <i className="bi bi-person-badge"></i> {opAutoriza ? opAutoriza.nome : `Func. #${l.id_func_autoriza}`}
+                                </div>
                                 {vistRetirada && (
-                                  <div className="mt-1 bg-light p-1.5 rounded border fs-8 text-dark">
-                                    <strong>KM de Saída:</strong> {vistRetirada.km} KM | <strong>Combustível:</strong> {vistRetirada.nivel_combustivel}%
-                                    {vistRetirada.observacoes && <div><strong>Notas:</strong> {vistRetirada.observacoes}</div>}
+                                  <div className="bg-light-subtle p-2 rounded border fs-8 text-dark">
+                                    <div className="d-flex justify-content-between mb-1">
+                                      <span><strong>KM:</strong> {vistRetirada.km} KM</span>
+                                      <span><strong>Combustível:</strong> {vistRetirada.nivel_combustivel}%</span>
+                                    </div>
+                                    {vistRetirada.observacoes && <div className="text-muted mt-1 pt-1 border-top border-light">Notas: {vistRetirada.observacoes}</div>}
                                   </div>
                                 )}
-                              </div>
+                              </>
                             ) : (
-                              <div className="fs-8 text-muted">Pendente de retirada</div>
+                              <div className="fs-7 text-muted fst-italic">Pendente de retirada</div>
                             )}
                           </div>
 
                           {/* Devolução */}
-                          <div className={`border-start ${l.data_devol_real ? 'border-primary' : 'border-light'} border-2 ps-3 pb-1`}>
-                            <span className="fw-semibold">3. Devolução & Fechamento</span>
+                          <div className={`border-start ${l.data_devol_real ? 'border-primary' : 'border-light'} border-2 ps-3`}>
+                            <div className={`fw-semibold mb-1 ${l.data_devol_real ? 'text-primary' : l.status === 'cancelada' ? 'text-danger' : 'text-muted'}`}>3. Devolução & Fechamento</div>
                             {l.data_devol_real ? (
-                              <div className="fs-8 text-muted">
-                                Concluída em {formatDateSafe(l.data_devol_real)} por:
-                                <br />
-                                <i className="bi bi-person-badge me-1"></i> {opDevolucao ? opDevolucao.nome : `Funcionário #${vistDevolucao?.id_func}`}
+                              <>
+                                <div className="fs-7">
+                                  Concluída em <strong>{formatDateSafe(l.data_devol_real)}</strong>
+                                </div>
+                                <div className="fs-8 text-muted mt-1 d-flex align-items-center gap-1 mb-2">
+                                  <i className="bi bi-person-badge"></i> {opDevolucao ? opDevolucao.nome : `Func. #${vistDevolucao?.id_func}`}
+                                </div>
                                 {vistDevolucao && (
-                                  <div className="mt-1 bg-light p-1.5 rounded border fs-8 text-dark">
-                                    <strong>KM de Retorno:</strong> {vistDevolucao.km} KM | <strong>Combustível:</strong> {vistDevolucao.nivel_combustivel}%
-                                    {vistDevolucao.observacoes && <div><strong>Notas:</strong> {vistDevolucao.observacoes}</div>}
+                                  <div className="bg-light-subtle p-2 rounded border fs-8 text-dark">
+                                    <div className="d-flex justify-content-between mb-1">
+                                      <span><strong>KM:</strong> {vistDevolucao.km} KM</span>
+                                      <span><strong>Combustível:</strong> {vistDevolucao.nivel_combustivel}%</span>
+                                    </div>
+                                    {vistDevolucao.observacoes && <div className="text-muted mt-1 pt-1 border-top border-light">Notas: {vistDevolucao.observacoes}</div>}
                                   </div>
                                 )}
-                              </div>
+                              </>
                             ) : l.status === 'cancelada' ? (
-                              <div className="fs-8 text-danger fw-semibold">Locação Cancelada</div>
+                              <div className="fs-7 text-danger fw-semibold">Locação Cancelada</div>
                             ) : (
-                              <div className="fs-8 text-muted">Pendente de devolução</div>
+                              <div className="fs-7 text-muted fst-italic">Pendente de devolução</div>
                             )}
                           </div>
                         </div>
                       </div>
 
                       {/* Financeiro */}
-                      <div>
-                        <h6 className="fw-bold text-primary mb-2 pb-1 border-bottom d-flex align-items-center">
-                          <i className="bi bi-cash-coin me-2"></i> Faturamento e Pagamento
+                      <div className="detail-card">
+                        <h6 className="detail-section-title">
+                          <i className="bi bi-cash-coin"></i> Faturamento e Pagamento
                         </h6>
-                        <div className="bg-light p-3 rounded-3 border">
+                        <div>
                           {l.status === 'cancelada' ? (
-                            <div className="text-center py-2 text-danger fw-semibold">
+                            <div className="text-center py-3 bg-danger-subtle text-danger rounded-3 fw-semibold">
                               Reserva Cancelada — Sem cobranças
                             </div>
                           ) : (
                             <>
-                              <div className="fs-7 mb-2">
-                                <div className="d-flex justify-content-between mb-1">
-                                  <span>Diárias Totais:</span>
+                              <div className="fs-7 mb-3">
+                                <div className="d-flex justify-content-between mb-2">
+                                  <span className="text-muted">Diárias Totais:</span>
                                   <span className="fw-semibold">{diasLocados || '—'} dias</span>
                                 </div>
-                                <div className="d-flex justify-content-between mb-1">
-                                  <span>Diárias do Carro (padrão):</span>
-                                  <span>R$ {((diasLocados || 1) * diariaVeiculo).toFixed(2)}</span>
+                                <div className="d-flex justify-content-between mb-2">
+                                  <span className="text-muted">Diárias do Carro (padrão):</span>
+                                  <span className="fw-medium">R$ {((diasLocados || 1) * diariaVeiculo).toFixed(2)}</span>
                                 </div>
                                 <div className="d-flex justify-content-between mb-1">
-                                  <span>Diárias do Seguro:</span>
-                                  <span>R$ {((diasLocados || 1) * diariaSeguro).toFixed(2)}</span>
+                                  <span className="text-muted">Diárias do Seguro:</span>
+                                  <span className="fw-medium">R$ {((diasLocados || 1) * diariaSeguro).toFixed(2)}</span>
                                 </div>
                               </div>
-                              <hr className="my-2" />
-                              <div className="d-flex justify-content-between fw-bold text-primary fs-6 mb-2">
-                                <span>Valor Total:</span>
-                                <span>R$ {l.valor_total ? parseFloat(String(l.valor_total)).toFixed(2) : '—'}</span>
+                              <div className="d-flex justify-content-between align-items-center pt-3 border-top mb-3">
+                                <span className="fw-bold text-dark fs-6">Valor Total:</span>
+                                <span className="fw-bold text-primary fs-4">R$ {l.valor_total ? parseFloat(String(l.valor_total)).toFixed(2) : '—'}</span>
                               </div>
                               {payment ? (
-                                <div className="fs-8 text-success text-center bg-success bg-opacity-10 border border-success border-opacity-25 p-2 rounded-2">
-                                  <i className="bi bi-check-circle-fill me-1"></i>
+                                <div className="d-flex align-items-center justify-content-center gap-2 p-3 bg-success-subtle text-success rounded-3 fw-medium">
+                                  <i className="bi bi-check-circle-fill"></i>
                                   Pago via {payment.forma_pagamento.toUpperCase()} em {formatDateSafe(payment.data)}
                                 </div>
                               ) : (
-                                <div className="fs-8 text-muted text-center p-1 bg-warning bg-opacity-10 border border-warning border-opacity-25 rounded-2">
+                                <div className="text-center p-2 bg-warning-subtle text-warning-emphasis rounded-3 fw-medium">
                                   Aguardando encerramento
                                 </div>
                               )}

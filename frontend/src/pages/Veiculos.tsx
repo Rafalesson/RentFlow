@@ -618,58 +618,91 @@ const Veiculos: React.FC = () => {
                   <button type="button" className="btn-close" onClick={() => setSelectedVeiculoDetails(null)}></button>
                 </div>
                 
-                <div className="modal-body px-4 py-3">
+                <div className="modal-body bg-light-subtle px-4 py-4">
                   <div className="row g-4">
-                    {/* Coluna 1 (Dados do Carro) */}
+                    {/* Dados do Carro */}
                     <div className="col-md-6">
-                      <h6 className="fw-bold text-primary mb-3 pb-1 border-bottom d-flex align-items-center">
-                        <i className="bi bi-info-circle me-2"></i> Informações do Veículo
-                      </h6>
-                      <div className="fs-7">
-                        <div className="mb-2"><strong>Marca:</strong> {v.marca}</div>
-                        <div className="mb-2"><strong>Modelo:</strong> {v.modelo}</div>
-                        <div className="mb-2"><strong>Placa:</strong> <code>{v.placa}</code></div>
-                        <div className="mb-2"><strong>Renavam:</strong> <code>{v.renavam}</code></div>
-                        <div className="mb-2"><strong>Cor:</strong> {v.cor}</div>
-                        <div className="mb-2"><strong>Ano de Fabricação:</strong> {v.ano_fabricacao}</div>
-                        <div className="mb-2">
-                          <strong>Categoria:</strong> {cat ? cat.nome : '—'} 
-                          {cat && <span className="ms-2 text-muted">(Diária: R$ {parseFloat(String(cat.valor_diaria)).toFixed(2)})</span>}
+                      <div className="detail-card h-100">
+                        <h6 className="detail-section-title">
+                          <i className="bi bi-info-circle"></i> Informações do Veículo
+                        </h6>
+                        <div className="row g-3">
+                          <div className="col-6">
+                            <span className="detail-label">Marca</span>
+                            <div className="detail-value">{v.marca}</div>
+                          </div>
+                          <div className="col-6">
+                            <span className="detail-label">Modelo</span>
+                            <div className="detail-value">{v.modelo}</div>
+                          </div>
+                          <div className="col-6">
+                            <span className="detail-label">Placa</span>
+                            <div className="detail-value"><code>{v.placa}</code></div>
+                          </div>
+                          <div className="col-6">
+                            <span className="detail-label">Renavam</span>
+                            <div className="detail-value"><code>{v.renavam}</code></div>
+                          </div>
+                          <div className="col-6">
+                            <span className="detail-label">Cor</span>
+                            <div className="detail-value">{v.cor}</div>
+                          </div>
+                          <div className="col-6">
+                            <span className="detail-label">Ano Fab.</span>
+                            <div className="detail-value">{v.ano_fabricacao}</div>
+                          </div>
+                          <div className="col-12 mt-4 pt-3 border-top">
+                            <span className="detail-label mb-2">Categoria e Diária</span>
+                            <div className="d-flex justify-content-between align-items-center">
+                              <span className="fw-medium text-primary fs-5">{cat ? cat.nome : '—'}</span>
+                              {cat && <span className="badge bg-primary-subtle text-primary py-2 px-3">R$ {parseFloat(String(cat.valor_diaria)).toFixed(2)} / dia</span>}
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                     
-                    {/* Coluna 2 (Métricas & Estado) */}
+                    {/* Métricas & Estado */}
                     <div className="col-md-6">
-                      <h6 className="fw-bold text-primary mb-3 pb-1 border-bottom d-flex align-items-center">
-                        <i className="bi bi-speedometer2 me-2"></i> Métricas & Estado
-                      </h6>
-                      <div className="fs-7">
-                        <div className="mb-2">
-                          <strong>Combustível:</strong> <span className="badge bg-secondary">{v.tipo_combustivel.toUpperCase()}</span>
-                        </div>
-                        <div className="mb-2">
-                          <strong>KM Atual:</strong> {Number(v.km_atual).toLocaleString('pt-BR')} KM
-                        </div>
-                        <div className="mb-3">
-                          <strong className="d-block mb-1">Nível de Combustível ({v.nivel_combustivel}%):</strong>
-                          <div className="progress" style={{ height: '8px' }}>
-                            <div
-                              className={`progress-bar ${Number(v.nivel_combustivel) < 20 ? 'bg-danger' : 'bg-success'}`}
-                              role="progressbar"
-                              style={{ width: `${v.nivel_combustivel}%` }}
-                            ></div>
+                      <div className="detail-card h-100">
+                        <h6 className="detail-section-title">
+                          <i className="bi bi-speedometer2"></i> Métricas & Estado
+                        </h6>
+                        <div className="row g-3">
+                          <div className="col-12">
+                            <span className="detail-label">Combustível</span>
+                            <div className="detail-value"><span className="badge bg-secondary">{v.tipo_combustivel.toUpperCase()}</span></div>
                           </div>
-                        </div>
-                        <div className="mb-2 d-flex align-items-center gap-2">
-                          <strong>Status:</strong>
-                          <span className={`badge ${
-                            v.status === 'disponivel' ? 'bg-success' :
-                            v.status === 'locado' ? 'bg-info' :
-                            v.status === 'em_manutencao' ? 'bg-warning text-dark' : 'bg-danger'
-                          }`}>
-                            {v.status.toUpperCase()}
-                          </span>
+                          <div className="col-12">
+                            <span className="detail-label">Quilometragem Atual</span>
+                            <div className="detail-value fs-4 fw-bold">{Number(v.km_atual).toLocaleString('pt-BR')} <span className="fs-6 text-muted fw-normal">KM</span></div>
+                          </div>
+                          <div className="col-12 mt-3">
+                            <span className="detail-label mb-2">Nível de Combustível ({v.nivel_combustivel}%)</span>
+                            <div className="progress" style={{ height: '8px' }}>
+                              <div
+                                className={`progress-bar ${Number(v.nivel_combustivel) < 20 ? 'bg-danger' : 'bg-success'}`}
+                                role="progressbar"
+                                style={{ width: `${v.nivel_combustivel}%` }}
+                              ></div>
+                            </div>
+                          </div>
+                          <div className="col-12 mt-4 pt-3 border-top">
+                            <span className="detail-label mb-2">Status do Veículo</span>
+                            <div>
+                              <span className={`badge py-2 px-3 ${
+                                v.status === 'disponivel' ? 'bg-success' :
+                                v.status === 'locado' ? 'bg-info' :
+                                v.status === 'em_manutencao' ? 'bg-warning text-dark' : 'bg-danger'
+                              }`}>
+                                <i className={`bi me-1 ${
+                                  v.status === 'disponivel' ? 'bi-check-circle' :
+                                  v.status === 'locado' ? 'bi-car-front' :
+                                  v.status === 'em_manutencao' ? 'bi-tools' : 'bi-exclamation-triangle'
+                                }`}></i> {v.status.toUpperCase()}
+                              </span>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>

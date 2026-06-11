@@ -567,51 +567,90 @@ const Clientes: React.FC = () => {
                 <button type="button" className="btn-close" onClick={() => setSelectedClienteDetails(null)}></button>
               </div>
               
-              <div className="modal-body px-4 py-3">
+              <div className="modal-body bg-light-subtle px-4 py-4">
                 <div className="row g-4">
                   {/* Coluna 1 (Identificação & Contato) */}
                   <div className="col-md-6">
-                    <h6 className="fw-bold text-primary mb-3 pb-1 border-bottom d-flex align-items-center">
-                      <i className="bi bi-person-vcard me-2"></i> Identificação & Contato
-                    </h6>
-                    <div className="fs-7">
-                      <div className="mb-2"><strong>Nome Completo:</strong> {selectedClienteDetails.nome}</div>
-                      <div className="mb-2"><strong>CPF:</strong> <code>{selectedClienteDetails.cpf}</code></div>
-                      <div className="mb-2"><strong>E-mail:</strong> {selectedClienteDetails.email}</div>
-                      <div className="mb-2">
-                        <strong>Data de Nascimento:</strong> {formatDateSafe(selectedClienteDetails.data_nascimento)}
-                      </div>
-                      <div className="mb-2 d-flex align-items-center gap-2">
-                        <strong>Status Financeiro:</strong>
-                        {selectedClienteDetails.inadimplente ? (
-                          <span className="badge bg-danger d-inline-flex align-items-center gap-1">
-                            <i className="bi bi-exclamation-triangle-fill fs-9"></i> INADIMPLENTE
-                          </span>
-                        ) : (
-                          <span className="badge bg-success d-inline-flex align-items-center gap-1">
-                            <i className="bi bi-check-circle-fill fs-9"></i> REGULAR
-                          </span>
-                        )}
+                    <div className="detail-card h-100">
+                      <h6 className="detail-section-title">
+                        <i className="bi bi-person-vcard"></i> Identificação & Contato
+                      </h6>
+                      <div className="row g-3">
+                        <div className="col-12">
+                          <span className="detail-label">Nome Completo</span>
+                          <div className="detail-value">{selectedClienteDetails.nome}</div>
+                        </div>
+                        <div className="col-6">
+                          <span className="detail-label">CPF</span>
+                          <div className="detail-value"><code>{selectedClienteDetails.cpf}</code></div>
+                        </div>
+                        <div className="col-6">
+                          <span className="detail-label">Nascimento</span>
+                          <div className="detail-value">{formatDateSafe(selectedClienteDetails.data_nascimento)}</div>
+                        </div>
+                        <div className="col-12">
+                          <span className="detail-label">E-mail</span>
+                          <div className="detail-value text-break">{selectedClienteDetails.email}</div>
+                        </div>
+                        <div className="col-12 mt-4 pt-3 border-top">
+                          <span className="detail-label mb-2">Status Financeiro</span>
+                          {selectedClienteDetails.inadimplente ? (
+                            <span className="badge bg-danger d-inline-flex align-items-center gap-1 py-2 px-3">
+                              <i className="bi bi-exclamation-triangle-fill"></i> INADIMPLENTE
+                            </span>
+                          ) : (
+                            <span className="badge bg-success d-inline-flex align-items-center gap-1 py-2 px-3">
+                              <i className="bi bi-check-circle-fill"></i> REGULAR
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
                   
                   {/* Coluna 2 (CNH & Endereço) */}
                   <div className="col-md-6">
-                    <h6 className="fw-bold text-primary mb-3 pb-1 border-bottom d-flex align-items-center">
-                      <i className="bi bi-card-text me-2"></i> Habilitação & Endereço
-                    </h6>
-                    <div className="fs-7">
-                      <div className="mb-2"><strong>Número da CNH:</strong> <code>{selectedClienteDetails.cnh_numero}</code></div>
-                      <div className="mb-2"><strong>Categoria:</strong> <span className="badge bg-secondary">{selectedClienteDetails.cnh_categoria}</span></div>
-                      <div className="mb-2">
-                        <strong>Validade da CNH:</strong> {formatDateSafe(selectedClienteDetails.cnh_validade)}
+                    <div className="detail-card mb-4" style={{ height: 'auto' }}>
+                      <h6 className="detail-section-title">
+                        <i className="bi bi-card-text"></i> Habilitação (CNH)
+                      </h6>
+                      <div className="row g-3">
+                        <div className="col-12">
+                          <span className="detail-label">Número do Documento</span>
+                          <div className="detail-value"><code>{selectedClienteDetails.cnh_numero}</code></div>
+                        </div>
+                        <div className="col-6">
+                          <span className="detail-label">Categoria</span>
+                          <div className="detail-value"><span className="badge bg-secondary px-2 py-1">{selectedClienteDetails.cnh_categoria}</span></div>
+                        </div>
+                        <div className="col-6">
+                          <span className="detail-label">Validade</span>
+                          <div className="detail-value">{formatDateSafe(selectedClienteDetails.cnh_validade)}</div>
+                        </div>
                       </div>
-                      <div className="mt-3 pt-2 border-top">
-                        <div className="mb-1"><strong>Rua:</strong> {selectedClienteDetails.endereco_rua}, N° {selectedClienteDetails.endereco_numero}</div>
-                        <div className="mb-1"><strong>Bairro:</strong> {selectedClienteDetails.endereco_bairro}</div>
-                        <div className="mb-1"><strong>Cidade/Estado:</strong> {selectedClienteDetails.endereco_cidade} - {selectedClienteDetails.endereco_estado}</div>
-                        <div className="mb-1"><strong>CEP:</strong> {selectedClienteDetails.endereco_cep}</div>
+                    </div>
+                    
+                    <div className="detail-card" style={{ height: 'auto' }}>
+                      <h6 className="detail-section-title">
+                        <i className="bi bi-geo-alt"></i> Endereço
+                      </h6>
+                      <div className="row g-3">
+                        <div className="col-12">
+                          <span className="detail-label">Logradouro</span>
+                          <div className="detail-value">{selectedClienteDetails.endereco_rua}, N° {selectedClienteDetails.endereco_numero}</div>
+                        </div>
+                        <div className="col-12">
+                          <span className="detail-label">Bairro</span>
+                          <div className="detail-value">{selectedClienteDetails.endereco_bairro}</div>
+                        </div>
+                        <div className="col-6">
+                          <span className="detail-label">Cidade / UF</span>
+                          <div className="detail-value">{selectedClienteDetails.endereco_cidade} - {selectedClienteDetails.endereco_estado}</div>
+                        </div>
+                        <div className="col-6">
+                          <span className="detail-label">CEP</span>
+                          <div className="detail-value">{selectedClienteDetails.endereco_cep}</div>
+                        </div>
                       </div>
                     </div>
                   </div>

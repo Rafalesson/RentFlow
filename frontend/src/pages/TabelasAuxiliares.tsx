@@ -677,55 +677,78 @@ const TabelasAuxiliares: React.FC = () => {
                   <button type="button" className="btn-close" onClick={() => setSelectedFuncDetails(null)}></button>
                 </div>
                 
-                <div className="modal-body px-4 py-3">
-                  <div className="row g-4 align-items-center">
-                    {/* Coluna 1 (Foto de Exibição / Iniciais) */}
-                    <div className="col-md-5 d-flex flex-column align-items-center justify-content-center text-center border-end">
-                      <div 
-                        className="position-relative overflow-hidden mb-3 d-flex align-items-center justify-content-center border"
-                        style={{
-                          width: '130px',
-                          height: '130px',
-                          borderRadius: '50%',
-                          boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15)',
-                          background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
-                          borderWidth: '3px'
-                        }}
-                      >
-                        {f.foto_perfil ? (
-                          <img 
-                            src={f.foto_perfil} 
-                            alt="Foto de perfil" 
-                            className="w-100 h-100 object-fit-cover"
-                          />
-                        ) : (
-                          <div 
-                            className="d-flex align-items-center justify-content-center w-100 h-100 text-white fw-bold"
-                            style={{ 
-                              fontSize: '3rem',
-                              background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
-                            }}
-                          >
-                            {getInitials(f.nome)}
-                          </div>
-                        )}
+                <div className="modal-body bg-light-subtle px-4 py-4">
+                  <div className="row g-4">
+                    {/* Perfil */}
+                    <div className="col-md-4">
+                      <div className="detail-card h-100 d-flex flex-column align-items-center justify-content-center text-center p-4">
+                        <div 
+                          className="position-relative overflow-hidden mb-3 d-flex align-items-center justify-content-center border"
+                          style={{
+                            width: '130px',
+                            height: '130px',
+                            borderRadius: '50%',
+                            boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15)',
+                            background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
+                            borderWidth: '3px'
+                          }}
+                        >
+                          {f.foto_perfil ? (
+                            <img 
+                              src={f.foto_perfil} 
+                              alt="Foto de perfil" 
+                              className="w-100 h-100 object-fit-cover"
+                            />
+                          ) : (
+                            <div 
+                              className="d-flex align-items-center justify-content-center w-100 h-100 text-white fw-bold"
+                              style={{ 
+                                fontSize: '3rem',
+                                background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+                              }}
+                            >
+                              {getInitials(f.nome)}
+                            </div>
+                          )}
+                        </div>
+                        <span className={`badge ${f.cargo === 'gerente' ? 'bg-primary-subtle text-primary border border-primary border-opacity-25' : 'bg-secondary-subtle text-secondary border border-secondary border-opacity-25'} px-3 py-1.5 rounded-pill`}>
+                          {f.cargo.toUpperCase()}
+                        </span>
                       </div>
-                      <span className={`badge ${f.cargo === 'gerente' ? 'bg-primary-subtle text-primary border border-primary border-opacity-25' : 'bg-secondary-subtle text-secondary border border-secondary border-opacity-25'} px-3 py-1.5 rounded-pill mb-2`}>
-                        {f.cargo.toUpperCase()}
-                      </span>
                     </div>
                     
-                    {/* Coluna 2 (Ficha de Cadastro) */}
-                    <div className="col-md-7 ps-md-4">
-                      <h6 className="fw-bold text-primary mb-3 pb-1 border-bottom d-flex align-items-center">
-                        <i className="bi bi-file-earmark-person me-2"></i> Ficha Cadastral
-                      </h6>
-                      <div className="fs-7">
-                        <div className="mb-2"><strong>Nome Completo:</strong> {f.nome}</div>
-                        <div className="mb-2"><strong>CPF:</strong> <code>{f.cpf}</code></div>
-                        <div className="mb-2"><strong>E-mail:</strong> {f.email}</div>
-                        <div className="mb-2"><strong>Login (Usuário):</strong> <code>@{f.login}</code></div>
-                        <div className="mb-2"><strong>ID de Registro:</strong> #{f.id_func}</div>
+                    {/* Ficha de Cadastro */}
+                    <div className="col-md-8">
+                      <div className="detail-card h-100">
+                        <h6 className="detail-section-title">
+                          <i className="bi bi-file-earmark-person"></i> Ficha Cadastral
+                        </h6>
+                        <div className="row g-3">
+                          <div className="col-12">
+                            <span className="detail-label">Nome Completo</span>
+                            <div className="detail-value fw-semibold fs-5">{f.nome}</div>
+                          </div>
+                          <div className="col-6">
+                            <span className="detail-label">CPF</span>
+                            <div className="detail-value"><code>{f.cpf}</code></div>
+                          </div>
+                          <div className="col-6">
+                            <span className="detail-label">ID de Registro</span>
+                            <div className="detail-value text-muted">#{f.id_func}</div>
+                          </div>
+                          <div className="col-12">
+                            <span className="detail-label">E-mail</span>
+                            <div className="detail-value text-break">{f.email}</div>
+                          </div>
+                          <div className="col-12 mt-4 pt-3 border-top">
+                            <span className="detail-label">Login (Usuário)</span>
+                            <div className="detail-value fw-medium mt-1">
+                              <span className="badge bg-light text-dark border px-3 py-2 fs-6 text-lowercase">
+                                <i className="bi bi-person me-2 text-muted"></i>@{f.login}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

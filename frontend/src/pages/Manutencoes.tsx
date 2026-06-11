@@ -632,54 +632,90 @@ const Manutencoes: React.FC = () => {
                   <button type="button" className="btn-close" onClick={() => setSelectedManutencaoDetails(null)}></button>
                 </div>
                 
-                <div className="modal-body px-4 py-3">
+                <div className="modal-body bg-light-subtle px-4 py-4">
                   <div className="row g-4">
-                    {/* Coluna 1 (Identificação & Veículo) */}
+                    {/* Identificação & Veículo */}
                     <div className="col-md-6">
-                      <h6 className="fw-bold text-primary mb-3 pb-1 border-bottom d-flex align-items-center">
-                        <i className="bi bi-info-circle me-2"></i> Identificação & Veículo
-                      </h6>
-                      <div className="fs-7">
-                        <div className="mb-2"><strong>Código:</strong> #{m.id_manut}</div>
-                        <div className="mb-2"><strong>Veículo:</strong> {getVehicleModel(m.placa_veiculo)}</div>
-                        <div className="mb-2"><strong>Placa:</strong> <code>{m.placa_veiculo}</code></div>
-                        <div className="mb-2">
-                          <strong>Tipo de Manutenção:</strong>{' '}
-                          <span className={`badge ${m.tipo === 'preventiva' ? 'bg-info' : 'bg-danger'}`}>
-                            {m.tipo.toUpperCase()}
-                          </span>
+                      <div className="detail-card h-100">
+                        <h6 className="detail-section-title">
+                          <i className="bi bi-info-circle"></i> Identificação & Veículo
+                        </h6>
+                        <div className="row g-3">
+                          <div className="col-6">
+                            <span className="detail-label">Cód. Manutenção</span>
+                            <div className="detail-value">#{m.id_manut}</div>
+                          </div>
+                          <div className="col-6">
+                            <span className="detail-label">Tipo</span>
+                            <div className="detail-value">
+                              <span className={`badge ${m.tipo === 'preventiva' ? 'bg-info' : 'bg-danger'}`}>
+                                {m.tipo.toUpperCase()}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="col-12">
+                            <span className="detail-label">Veículo</span>
+                            <div className="detail-value">{getVehicleModel(m.placa_veiculo)}</div>
+                          </div>
+                          <div className="col-12">
+                            <span className="detail-label">Placa</span>
+                            <div className="detail-value"><code>{m.placa_veiculo}</code></div>
+                          </div>
+                          <div className="col-12 mt-4 pt-3 border-top">
+                            <span className="detail-label">Operador Responsável</span>
+                            <div className="detail-value d-flex align-items-center gap-2 mt-1">
+                              <i className="bi bi-person-badge text-muted"></i> {getFuncName(m.id_func)}
+                            </div>
+                          </div>
                         </div>
-                        <div className="mb-2"><strong>Operador Responsável:</strong> {getFuncName(m.id_func)}</div>
                       </div>
                     </div>
                     
-                    {/* Coluna 2 (Fluxo & Faturamento) */}
+                    {/* Fluxo & Faturamento */}
                     <div className="col-md-6">
-                      <h6 className="fw-bold text-primary mb-3 pb-1 border-bottom d-flex align-items-center">
-                        <i className="bi bi-currency-dollar me-2"></i> Fluxo & Faturamento
-                      </h6>
-                      <div className="fs-7">
-                        <div className="mb-2"><strong>Motivo:</strong> {m.motivo}</div>
-                        <div className="mb-2"><strong>Descrição Detalhada:</strong> {m.descricao || '—'}</div>
-                        <div className="mb-2"><strong>Data de Entrada:</strong> {formatDateSafe(m.data_entrada)}</div>
-                        <div className="mb-2"><strong>Previsão de Saída:</strong> {formatDateSafe(m.previsao_saida)}</div>
-                        <div className="mb-2">
-                          <strong>Data de Conclusão:</strong>{' '}
-                          {m.data_saida_real ? (
-                            <span className="text-success fw-semibold">{formatDateSafe(m.data_saida_real)}</span>
-                          ) : (
-                            <span className="badge bg-warning text-dark">Em Oficina</span>
-                          )}
-                        </div>
-                        <div className="mb-2">
-                          <strong>Custo Total:</strong>{' '}
-                          {m.custo !== null && m.custo !== undefined ? (
-                            <span className="fw-bold text-success">
-                              R$ {parseFloat(String(m.custo)).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                            </span>
-                          ) : (
-                            <span className="text-muted">—</span>
-                          )}
+                      <div className="detail-card h-100">
+                        <h6 className="detail-section-title">
+                          <i className="bi bi-currency-dollar"></i> Fluxo & Faturamento
+                        </h6>
+                        <div className="row g-3">
+                          <div className="col-12">
+                            <span className="detail-label">Motivo</span>
+                            <div className="detail-value fw-semibold">{m.motivo}</div>
+                          </div>
+                          <div className="col-12">
+                            <span className="detail-label">Descrição Detalhada</span>
+                            <div className="detail-value text-muted text-break">{m.descricao || '—'}</div>
+                          </div>
+                          <div className="col-6">
+                            <span className="detail-label">Entrada</span>
+                            <div className="detail-value">{formatDateSafe(m.data_entrada)}</div>
+                          </div>
+                          <div className="col-6">
+                            <span className="detail-label">Prev. Saída</span>
+                            <div className="detail-value">{formatDateSafe(m.previsao_saida)}</div>
+                          </div>
+                          <div className="col-6 mt-3">
+                            <span className="detail-label">Data de Conclusão</span>
+                            <div className="detail-value">
+                              {m.data_saida_real ? (
+                                <span className="text-success fw-bold"><i className="bi bi-check-circle-fill me-1"></i>{formatDateSafe(m.data_saida_real)}</span>
+                              ) : (
+                                <span className="badge bg-warning text-dark"><i className="bi bi-tools me-1"></i>Em Oficina</span>
+                              )}
+                            </div>
+                          </div>
+                          <div className="col-6 mt-3">
+                            <span className="detail-label">Custo Total</span>
+                            <div className="detail-value">
+                              {m.custo !== null && m.custo !== undefined ? (
+                                <span className="text-success fs-5 fw-bold">
+                                  R$ {parseFloat(String(m.custo)).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                                </span>
+                              ) : (
+                                <span className="text-muted">—</span>
+                              )}
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>

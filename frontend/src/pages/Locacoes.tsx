@@ -448,10 +448,7 @@ const Locacoes: React.FC = () => {
     return v ? `${v.marca} ${v.modelo}` : placa;
   };
 
-  const getSeguroName = (id: number) => {
-    const s = seguros.find(seg => seg.id_seguro === id);
-    return s ? s.nome : String(id);
-  };
+
 
   const filteredLocacoes = locacoes.filter(l => {
     const clientName = getClientName(l.cpf_cliente).toLowerCase();
